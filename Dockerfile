@@ -2,7 +2,8 @@ FROM php:8.0-apache
 
 # 安装必要的库
 RUN apt-get update && \
-    apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev && \
+    apt-get install -y && \
+    libpng-dev libjpeg-dev libfreetype6-dev libjpeg62-turbo-dev && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install gd
 
@@ -20,5 +21,5 @@ COPY . /var/www/html/
 
 # 设置工作目录
 WORKDIR /var/www/html
-
 EXPOSE 80
+CMD ["apache2-foreground"]
